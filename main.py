@@ -7,7 +7,7 @@ def update_money(name,updatedAge):
     pass
 
 def lookup(name):
-    c.execute(f"SELECT * FROM persons WHERE firstname='{name}'")
+    c.execute(f"SELECT money FROM persons WHERE firstname='{name}'")
     print(c.fetchone())
 
 def remove(name):
@@ -28,7 +28,12 @@ create()
 conn.commit()
 print("Welcome to the database simulator")
 while(True):
-    user = input("What would you like to do: add an entry (add), update money (update), lookup info (lookup) or remove an entry (remove) \n Press anything else to exit:  ")
+    user = input("What would you like to do: \n\t add an entry (add) \
+                \n\t update money (update) \
+                \n\t lookup how much money a specific user has (lookup) \
+                \n\t remove an entry (remove) \
+                \n\t Press anything else to exit:  ")
+    print("\n\n")
     user = user.lower()
     if user == "add":
         name = input("What is the name of the user? ")
