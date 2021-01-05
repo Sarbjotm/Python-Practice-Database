@@ -1,13 +1,21 @@
 import sqlite3
 
 def add(name,money):
-    c.execute(f"INSERT INTO persons VALUES ('{name}','{money}')")
+    c.execute(f"""INSERT INTO persons 
+                  VALUES ('{name}','{money}')
+            """)
 
-def update_money(name,updatedAge):
-    pass
+def update_money(name,updatedMoney):
+    c.execute(f"""UPDATE persons 
+                  SET money = {updatedMoney} 
+                  WHERE firstname='{name}'
+            """)
 
 def lookup(name):
-    c.execute(f"SELECT money FROM persons WHERE firstname='{name}'")
+    c.execute(f"""SELECT money 
+                  FROM persons 
+                  WHERE firstname='{name}'
+            """)
     print(c.fetchone())
 
 def remove(name):
@@ -41,19 +49,18 @@ while(True):
         add(name,dollars)
     elif user == "update":
         name = input("Whose money amount would you like to change: ?")
-        name = name.lower()
         dollars = input(f"How much money does {name} have? ")
-        update_money(name, dollars)
+        update_money(name,dollars)
     elif user == "remove":
         name = input("What is the name of the user that you want to remove? ")
-        name = name.lower()
         remove(name)
     elif user == "lookup":
         name = input("What is the name of the user that you want to lookup? ")
         lookup(name)
     else:
         break
+    conn.commit()
 
-    
+
 conn.commit()
 conn.close()
