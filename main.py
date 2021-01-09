@@ -16,7 +16,13 @@ def lookup(name):
                   FROM persons 
                   WHERE firstname='{name}'
             """)
-    print(c.fetchone())
+    print(f"{name} has {c.fetchone()[0]} dollars")
+
+def lookupall():
+    c.execute(f"""SELECT * 
+                  FROM persons
+            """)
+    print(c.fetchall())
 
 def remove(name):
     pass
@@ -39,9 +45,11 @@ while(True):
     user = input("What would you like to do: \n\t add an entry (add) \
                 \n\t update money (update) \
                 \n\t lookup how much money a specific user has (lookup) \
+                \n\t lookup everyone (lookupall) \
                 \n\t remove an entry (remove) \
-                \n\t Press anything else to exit:  ")
-    print("\n\n")
+                \n\t Press anything else to exit \
+                \n What would you like to do:  ")
+    print("\n")
     user = user.lower()
     if user == "add":
         name = input("What is the name of the user? ")
@@ -57,6 +65,8 @@ while(True):
     elif user == "lookup":
         name = input("What is the name of the user that you want to lookup? ")
         lookup(name)
+    elif user == "lookupall":
+        lookupall()
     else:
         break
     conn.commit()
