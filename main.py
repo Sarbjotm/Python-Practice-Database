@@ -29,6 +29,11 @@ def remove(name):
                   WHERE firstname='{name}'
             """)
 
+def addfield(entry):
+    c.execute(f"""ALTER TABLE persons 
+                  ADD COLUMN {entry} real DEFAULT '0'
+            """) 
+
 def create():
     c.execute("""
     CREATE TABLE IF NOT EXISTS persons(
@@ -48,6 +53,7 @@ while(True):
                 \n\t update money (update) \
                 \n\t lookup how much money a specific user has (lookup) \
                 \n\t lookup everyone (lookupall) \
+                \n\t add column (addcol) \
                 \n\t remove an entry (remove) \
                 \n\t Press anything else to exit \
                 \n What would you like to do:  ")
@@ -67,6 +73,9 @@ while(True):
     elif user == "lookup":
         name = input("What is the name of the user that you want to lookup? ")
         lookup(name)
+    elif user == "addcol":
+        entry = input("What entry do you want to add? ")
+        addfield(entry)
     elif user == "lookupall":
         lookupall()
     else:
