@@ -25,7 +25,9 @@ def lookupall():
     print(c.fetchall())
 
 def remove(name):
-    pass
+    c.execute(f"""DELETE from persons 
+                  WHERE firstname='{name}'
+            """)
 
 def create():
     c.execute("""
