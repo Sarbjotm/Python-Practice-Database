@@ -12,11 +12,14 @@ def update_money(name,updatedMoney):
             """)
 
 def lookup(name):
-    c.execute(f"""SELECT money 
-                  FROM persons 
-                  WHERE firstname='{name}'
-            """)
-    print(f"{name} has {c.fetchone()[0]} dollars")
+    try:
+        c.execute(f"""SELECT money 
+                    FROM persons 
+                    WHERE firstname='{name}'
+                """)
+        print(f"{name} has {c.fetchone()[0]} dollars")
+    except:
+        print("No user in database")
 
 def lookupall():
     c.execute(f"""SELECT * 
