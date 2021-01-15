@@ -1,5 +1,5 @@
 import sqlite3
-import os.path
+from pathlib import Path
 def add(name,money):
     c.execute(f"""INSERT INTO persons
                   VALUES ('{name}','{money}')
@@ -45,8 +45,10 @@ def create():
     ) 
     """)
 
-
-conn = sqlite3.connect(os.path.dirname(os.path.abspath(__file__)) + '/students.db')
+d = Path(__file__).resolve().parents[1]
+d = d/'students.db'
+print(d)
+conn = sqlite3.connect(str(d))
 c = conn.cursor()
 create()
 conn.commit()
